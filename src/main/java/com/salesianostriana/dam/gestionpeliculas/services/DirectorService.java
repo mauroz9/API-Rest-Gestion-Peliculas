@@ -3,12 +3,14 @@ package com.salesianostriana.dam.gestionpeliculas.services;
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorResponseDto;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
+import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorMenorDeEdadException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
 import com.salesianostriana.dam.gestionpeliculas.repositories.DirectorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,6 +52,14 @@ public class DirectorService {
             directorRepository.deleteById(id);
         }else{
             throw new DirectorNoEncontradoException(id);
+        }
+    }
+
+    public void detectarMenor(Director director, Integer anioEstreno){
+        int edad = director.getAnioNacimiento() - anioEstreno;
+
+        if(edad > 18){
+            throw new DirectorMenorDeEdadException(director.getId());
         }
     }
 

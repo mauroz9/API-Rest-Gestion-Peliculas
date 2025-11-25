@@ -1,12 +1,10 @@
 package com.salesianostriana.dam.gestionpeliculas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,13 +23,14 @@ public class Pelicula {
     private LocalDate fechaEstreno;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_director_pelicula"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "director_id"))
     private Director director;
 
-    @ManyToMany
-    @JoinColumn()
-    private List<Actor> actores;
-
-
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "actores_pelicula",
+            joinColumns = @JoinColumn(name = "pelicula_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    @ToString.Exclude
+    private List<Actor> actores = new ArrayList<>();
 }

@@ -8,13 +8,13 @@ import java.util.List;
 
 public record PeliculaResponseDto(Long id, String titulo, String genero, LocalDate fechaEstreno, DirectorSimpleDto director, List<ActorSimpleDto> actores) {
 
-    public PeliculaResponseDto of(Pelicula pelicula){
+    public static PeliculaResponseDto of(Pelicula pelicula){
         return new PeliculaResponseDto(
                 pelicula.getId(),
                 pelicula.getTitulo(),
                 pelicula.getGenero(),
                 pelicula.getFechaEstreno(),
-                director.of(pelicula.getDirector()),
+                DirectorSimpleDto.of(pelicula.getDirector()),
                 pelicula.getActores().stream().map(ActorSimpleDto::of).toList()
         );
     }

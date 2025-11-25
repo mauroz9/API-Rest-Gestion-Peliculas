@@ -17,7 +17,7 @@ public class GlobalErrorHandle {
         );
 
         problemDetail.setTitle("Entidad no encontrada");
-        //Preguntar a Luismi: problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/not-found"));
+        problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/not-found"));
 
         return problemDetail;
     }
@@ -29,7 +29,7 @@ public class GlobalErrorHandle {
         );
 
         problemDetail.setTitle("Película duplicada");
-        //Preguntar a Luismi: problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/duplicated-movie"));
+        problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/duplicated-movie"));
 
         return problemDetail;
     }
@@ -41,8 +41,7 @@ public class GlobalErrorHandle {
         );
 
         problemDetail.setTitle("Actor ya asignado");
-        //Preguntar a Luismi: problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/actor-assigned")),
-        // o por el contrario escribir URI.create("about:blank");
+        problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/actor-assigned"));
 
         return  problemDetail;
     }
@@ -54,7 +53,7 @@ public class GlobalErrorHandle {
         );
 
         problemDetail.setTitle("Director es menor de edad");
-        //Preguntar a Luismi: problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/under-age-director"));
+        problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/under-age-director"));
 
         return problemDetail;
     }

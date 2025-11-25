@@ -1,11 +1,9 @@
 package com.salesianostriana.dam.gestionpeliculas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +20,7 @@ public class Director {
     private String nombre;
     private Integer anioNacimiento;
 
-    @OneToMany
-    private List<Pelicula> peliculas;
+    @OneToMany(mappedBy = "director")
+    @ToString.Exclude
+    private List<Pelicula> peliculas = new ArrayList<>();
 }

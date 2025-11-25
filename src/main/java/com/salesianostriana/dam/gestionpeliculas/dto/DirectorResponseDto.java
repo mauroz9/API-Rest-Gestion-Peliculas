@@ -2,13 +2,16 @@ package com.salesianostriana.dam.gestionpeliculas.dto;
 
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
 
-public record DirectorResponseDto(Long id, String nombre, Integer anioNacimiento) {
+import java.util.List;
 
-    public DirectorResponseDto of(Director director){
+public record DirectorResponseDto(Long id, String nombre, Integer anioNacimiento, List<PeliculaResponseDto> peliculas) {
+
+    public static DirectorResponseDto of(Director director){
         return new DirectorResponseDto(
                 director.getId(),
                 director.getNombre(),
-                director.getAnioNacimiento()
+                director.getAnioNacimiento(),
+                director.getPeliculas().stream().map(PeliculaResponseDto::of).toList()
         );
     }
 }

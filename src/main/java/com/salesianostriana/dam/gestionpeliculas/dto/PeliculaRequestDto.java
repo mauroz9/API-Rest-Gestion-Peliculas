@@ -4,7 +4,7 @@ import com.salesianostriana.dam.gestionpeliculas.model.Pelicula;
 
 import java.time.LocalDate;
 
-public record PeliculaRequestDto(String titulo, String genero, LocalDate fechaEstreno) {
+public record PeliculaRequestDto(String titulo, String genero, LocalDate fechaEstreno, Long idDirector) {
 
     public Pelicula toEntity(){
         return Pelicula.builder()

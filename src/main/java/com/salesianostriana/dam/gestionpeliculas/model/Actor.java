@@ -4,11 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,8 +22,9 @@ public class Actor {
 
     private String nombre;
 
-    @ManyToMany
-    private List<Pelicula> peliculas;
+    @ManyToMany(mappedBy = "actores")
+    @ToString.Exclude
+    private List<Pelicula> peliculas = new ArrayList<>();
 
 
 

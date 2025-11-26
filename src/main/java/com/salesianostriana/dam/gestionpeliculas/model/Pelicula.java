@@ -33,4 +33,13 @@ public class Pelicula {
     )
     @ToString.Exclude
     private List<Actor> actores = new ArrayList<>();
+
+    //METODOS HELPER
+    public void addDirector(Director director){
+        this.setDirector(director);
+        if(director.getPeliculas().isEmpty()){
+            director.setPeliculas(new ArrayList<>());
+        }
+        director.getPeliculas().add(this);
+    }
 }

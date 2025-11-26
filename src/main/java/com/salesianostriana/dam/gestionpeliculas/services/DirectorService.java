@@ -2,7 +2,6 @@ package com.salesianostriana.dam.gestionpeliculas.services;
 
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorResponseDto;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorMenorDeEdadException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
@@ -10,7 +9,6 @@ import com.salesianostriana.dam.gestionpeliculas.repositories.DirectorRepository
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -36,15 +34,25 @@ public class DirectorService {
     public DirectorResponseDto save(DirectorRequestDto dto){
         Director guardado = directorRepository.save(dto.toEntity());
 
+        if(guardado.esMenor()){
+            throw new DirectorNoEncontradoException("El director que intentas guardar es menor de edad");
+        }
+
         return DirectorResponseDto.of(guardado);
     }
 
     public DirectorResponseDto modify(Long id, DirectorRequestDto dto){
-        return directorRepository.findById(id).map(d ->{
-            d.setNombre(dto.nombre());
-            d.setAnioNacimiento(dto.anioNacimiento());
-            return directorRepository.save(d);
-        }).map(DirectorResponseDto::of).orElseThrow(() -> new DirectorNoEncontradoException(id));
+        Director director = directorRepository.findById(id).orElseThrow(() -> new DirectorNoEncontradoException(id));
+
+        if(dto.toEntity().esMenor()){
+            throw new DirectorMenorDeEdadException("No puedes modificar que el director sea menor de edad");
+        }
+
+        director.setNombre(dto.nombre());
+        director.setAnioNacimiento(dto.anioNacimiento());
+
+        return DirectorResponseDto.of(director);
+
     }
 
     public void delete(Long id){
@@ -52,14 +60,6 @@ public class DirectorService {
             directorRepository.deleteById(id);
         }else{
             throw new DirectorNoEncontradoException(id);
-        }
-    }
-
-    public void detectarMenor(Director director, Integer anioEstreno){
-        int edad = director.getAnioNacimiento() - anioEstreno;
-
-        if(edad > 18){
-            throw new DirectorMenorDeEdadException(director.getId());
         }
     }
 

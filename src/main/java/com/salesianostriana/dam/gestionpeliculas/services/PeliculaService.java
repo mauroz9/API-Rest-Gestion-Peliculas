@@ -20,7 +20,6 @@ public class PeliculaService {
 
     private final PeliculaRepository peliculaRepository;
     private final DirectorRepository directorRepository;
-    private final DirectorService directorService;
     private final ActorRepository actorRepository;
 
     public List<PeliculaResponseDto> findAll() {
@@ -44,7 +43,9 @@ public class PeliculaService {
             throw new PeliculaYaExisteException(dto.titulo());
         }
 
-        directorService.detectarMenor(director, dto.fechaEstreno().getYear());
+        if(director.esMenor(dto.fechaEstreno().getYear())){
+            throw new DirectorMenorDeEdadException(director.getId());
+        }
 
         Pelicula pelicula = dto.toEntity();
         pelicula.addDirector(director);
@@ -56,7 +57,9 @@ public class PeliculaService {
         Pelicula pelicula = peliculaRepository.findById(id).orElseThrow(() -> new PeliculaNoEncontradaException(id));
         Director director = directorRepository.findById(dto.idDirector()).orElseThrow(() -> new DirectorNoEncontradoException(dto.idDirector()));
 
-        directorService.detectarMenor(director, dto.fechaEstreno().getYear());
+        if(director.esMenor(dto.fechaEstreno().getYear())){
+            throw new DirectorMenorDeEdadException(director.getId());
+        }
 
         if(peliculaRepository.existsByTitulo(dto.titulo()) && !pelicula.getTitulo().equals(dto.titulo())){
             throw new PeliculaYaExisteException(dto.titulo());
@@ -67,7 +70,7 @@ public class PeliculaService {
         pelicula.setFechaEstreno(dto.fechaEstreno());
         pelicula.addDirector(director);
 
-        return PeliculaResponseDto.of(pelicula);
+        return PeliculaResponseDto.of(peliculaRepository.save(pelicula));
     }
 
     public void delete(Long id) {

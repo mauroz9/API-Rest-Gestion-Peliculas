@@ -24,6 +24,7 @@ public class Director {
 
     @OneToMany(mappedBy = "director")
     @ToString.Exclude
+    @Builder.Default
     private List<Pelicula> peliculas = new ArrayList<>();
 
     public boolean esMenor(Integer anioEstreno){

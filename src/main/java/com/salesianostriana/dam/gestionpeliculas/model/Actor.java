@@ -24,5 +24,6 @@ public class Actor {
 
     @ManyToMany(mappedBy = "actores")
     @ToString.Exclude
+    @Builder.Default
     private List<Pelicula> peliculas = new ArrayList<>();
 }

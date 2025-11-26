@@ -32,6 +32,7 @@ public class Pelicula {
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
     @ToString.Exclude
+    @Builder.Default
     private List<Actor> actores = new ArrayList<>();
 
     //METODOS HELPER

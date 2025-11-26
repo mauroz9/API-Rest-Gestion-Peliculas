@@ -44,7 +44,7 @@ public class PeliculaService {
             throw new PeliculaYaExisteException(dto.titulo());
         }
 
-        if(director.detectarMenor(dto.fechaEstreno().getYear())){
+        if(director.esMenor(dto.fechaEstreno().getYear())){
             throw new DirectorMenorDeEdadException(director.getId());
         }
 
@@ -58,7 +58,7 @@ public class PeliculaService {
         Pelicula pelicula = peliculaRepository.findById(id).orElseThrow(() -> new PeliculaNoEncontradaException(id));
         Director director = directorRepository.findById(dto.idDirector()).orElseThrow(() -> new DirectorNoEncontradoException(dto.idDirector()));
 
-        if(director.detectarMenor(dto.fechaEstreno().getYear())){
+        if(director.esMenor(dto.fechaEstreno().getYear())){
             throw new DirectorMenorDeEdadException(director.getId());
         }
 

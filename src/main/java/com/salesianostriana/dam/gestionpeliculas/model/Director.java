@@ -26,7 +26,7 @@ public class Director {
     @ToString.Exclude
     private List<Pelicula> peliculas = new ArrayList<>();
 
-    public boolean detectarMenor(Integer anioEstreno){
+    public boolean esMenor(Integer anioEstreno){
         int edad = this.getAnioNacimiento() - anioEstreno;
 
         if(edad < 18){
@@ -36,7 +36,7 @@ public class Director {
         return false;
     }
 
-    public boolean detectarMenor(){
+    public boolean esMenor(){
         int edad = this.getAnioNacimiento() - LocalDate.now().getYear();
 
         if(edad < 18){

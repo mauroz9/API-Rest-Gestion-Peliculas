@@ -48,7 +48,7 @@ public class PeliculaService {
         pelicula.setTitulo(dto.titulo());
         pelicula.setGenero(dto.genero());
         pelicula.setFechaEstreno(dto.fechaEstreno());
-        pelicula.setDirector(director);
+        pelicula.addDirector(director);
 
         return PeliculaResponseDto.of(pelicula);
     }

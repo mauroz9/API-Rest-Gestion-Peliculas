@@ -20,7 +20,6 @@ public class PeliculaService {
 
     private final PeliculaRepository peliculaRepository;
     private final DirectorRepository directorRepository;
-    private final DirectorService directorService;
     private final ActorRepository actorRepository;
 
     public List<PeliculaResponseDto> findAll() {
@@ -71,7 +70,7 @@ public class PeliculaService {
         pelicula.setFechaEstreno(dto.fechaEstreno());
         pelicula.addDirector(director);
 
-        return PeliculaResponseDto.of(pelicula);
+        return PeliculaResponseDto.of(peliculaRepository.save(pelicula));
     }
 
     public void delete(Long id) {

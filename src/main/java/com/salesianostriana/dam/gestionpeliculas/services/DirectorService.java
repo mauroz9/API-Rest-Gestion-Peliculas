@@ -2,7 +2,6 @@ package com.salesianostriana.dam.gestionpeliculas.services;
 
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorResponseDto;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorMenorDeEdadException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
@@ -10,7 +9,6 @@ import com.salesianostriana.dam.gestionpeliculas.repositories.DirectorRepository
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -44,11 +42,17 @@ public class DirectorService {
     }
 
     public DirectorResponseDto modify(Long id, DirectorRequestDto dto){
-        return directorRepository.findById(id).map(d ->{
-            d.setNombre(dto.nombre());
-            d.setAnioNacimiento(dto.anioNacimiento());
-            return directorRepository.save(d);
-        }).map(DirectorResponseDto::of).orElseThrow(() -> new DirectorNoEncontradoException(id));
+        Director director = directorRepository.findById(id).orElseThrow(() -> new DirectorNoEncontradoException(id));
+
+        if(dto.toEntity().esMenor()){
+            throw new DirectorMenorDeEdadException("No puedes modificar que el director sea menor de edad");
+        }
+
+        director.setNombre(dto.nombre());
+        director.setAnioNacimiento(dto.anioNacimiento());
+
+        return DirectorResponseDto.of(director);
+
     }
 
     public void delete(Long id){

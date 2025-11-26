@@ -27,7 +27,7 @@ public class Director {
     private List<Pelicula> peliculas = new ArrayList<>();
 
     public boolean esMenor(Integer anioEstreno){
-        int edad = this.getAnioNacimiento() - anioEstreno;
+        int edad = LocalDate.now().getYear() - this.getAnioNacimiento();
 
         if(edad < 18){
             return true;
@@ -37,7 +37,7 @@ public class Director {
     }
 
     public boolean esMenor(){
-        int edad = this.getAnioNacimiento() - LocalDate.now().getYear();
+        int edad = LocalDate.now().getYear() - this.getAnioNacimiento();
 
         if(edad < 18){
             return true;

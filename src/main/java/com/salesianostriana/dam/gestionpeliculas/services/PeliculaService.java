@@ -2,10 +2,14 @@ package com.salesianostriana.dam.gestionpeliculas.services;
 
 import com.salesianostriana.dam.gestionpeliculas.dto.PeliculaRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.PeliculaResponseDto;
+import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
+import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorYaEnRepartoException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.PeliculaNoEncontradaException;
+import com.salesianostriana.dam.gestionpeliculas.model.Actor;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
 import com.salesianostriana.dam.gestionpeliculas.model.Pelicula;
+import com.salesianostriana.dam.gestionpeliculas.repositories.ActorRepository;
 import com.salesianostriana.dam.gestionpeliculas.repositories.DirectorRepository;
 import com.salesianostriana.dam.gestionpeliculas.repositories.PeliculaRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,7 @@ public class PeliculaService {
     private final PeliculaRepository peliculaRepository;
     private final DirectorRepository directorRepository;
     private final DirectorService directorService;
+    private final ActorRepository actorRepository;
 
     public List<PeliculaResponseDto> findAll() {
         List<PeliculaResponseDto> result = peliculaRepository.findAll().stream().map(PeliculaResponseDto::of).toList();
@@ -59,5 +64,20 @@ public class PeliculaService {
         } else {
             throw new PeliculaNoEncontradaException(id);
         }
+    }
+
+    public PeliculaResponseDto addActor(Long peliculaId, Long actorId){
+        Pelicula pelicula = peliculaRepository.findById(peliculaId).orElseThrow(() -> new PeliculaNoEncontradaException(peliculaId));
+        Actor actor = actorRepository.findById(actorId).orElseThrow(() -> new ActorNoEncontradoException(actorId));
+
+        boolean asignado = pelicula.getActores().stream().anyMatch(a -> a.getId().equals(actorId));
+
+        if(asignado){
+            throw new ActorYaEnRepartoException(actorId);
+        }
+        
+        pelicula.addActor(actor);
+
+        return PeliculaResponseDto.of(peliculaRepository.save(pelicula));
     }
 }

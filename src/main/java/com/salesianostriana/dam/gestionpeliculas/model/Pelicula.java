@@ -37,9 +37,11 @@ public class Pelicula {
     //METODOS HELPER
     public void addDirector(Director director){
         this.setDirector(director);
-        if(director.getPeliculas().isEmpty()){
-            director.setPeliculas(new ArrayList<>());
-        }
         director.getPeliculas().add(this);
+    }
+
+    public void addActor(Actor actor){
+        this.getActores().add(actor);
+        actor.getPeliculas().add(this);
     }
 }

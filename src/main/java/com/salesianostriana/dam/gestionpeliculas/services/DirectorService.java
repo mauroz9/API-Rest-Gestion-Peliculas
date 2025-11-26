@@ -55,12 +55,4 @@ public class DirectorService {
         }
     }
 
-    public void detectarMenor(Director director, Integer anioEstreno){
-        int edad = director.getAnioNacimiento() - anioEstreno;
-
-        if(edad > 18){
-            throw new DirectorMenorDeEdadException(director.getId());
-        }
-    }
-
 }

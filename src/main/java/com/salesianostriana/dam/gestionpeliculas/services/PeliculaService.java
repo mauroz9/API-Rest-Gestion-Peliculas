@@ -75,7 +75,7 @@ public class PeliculaService {
         if(asignado){
             throw new ActorYaEnRepartoException(actorId);
         }
-        
+
         pelicula.addActor(actor);
 
         return PeliculaResponseDto.of(peliculaRepository.save(pelicula));

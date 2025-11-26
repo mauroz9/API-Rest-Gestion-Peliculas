@@ -58,6 +58,10 @@ public class PeliculaService {
 
         directorService.detectarMenor(director, dto.fechaEstreno().getYear());
 
+        if(peliculaRepository.existsByTitulo(dto.titulo()) && !pelicula.getTitulo().equals(dto.titulo())){
+            throw new PeliculaYaExisteException(dto.titulo());
+        }
+
         pelicula.setTitulo(dto.titulo());
         pelicula.setGenero(dto.genero());
         pelicula.setFechaEstreno(dto.fechaEstreno());

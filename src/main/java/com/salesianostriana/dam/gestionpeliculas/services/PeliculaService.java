@@ -41,7 +41,12 @@ public class PeliculaService {
     }
 
     public PeliculaResponseDto save(PeliculaRequestDto dto) {
-        return PeliculaResponseDto.of(peliculaRepository.save(dto.toEntity()));
+        Director director = directorRepository.findById(dto.idDirector()).orElseThrow(() -> new DirectorNoEncontradoException(dto.idDirector()));
+
+        Pelicula pelicula = dto.toEntity();
+        pelicula.addDirector(director);
+
+        return PeliculaResponseDto.of(peliculaRepository.save(pelicula));
     }
 
     public PeliculaResponseDto modify(Long id, PeliculaRequestDto dto) {

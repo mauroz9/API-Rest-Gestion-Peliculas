@@ -2,10 +2,7 @@ package com.salesianostriana.dam.gestionpeliculas.services;
 
 import com.salesianostriana.dam.gestionpeliculas.dto.PeliculaRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.PeliculaResponseDto;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorYaEnRepartoException;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
-import com.salesianostriana.dam.gestionpeliculas.exceptions.PeliculaNoEncontradaException;
+import com.salesianostriana.dam.gestionpeliculas.exceptions.*;
 import com.salesianostriana.dam.gestionpeliculas.model.Actor;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
 import com.salesianostriana.dam.gestionpeliculas.model.Pelicula;
@@ -42,6 +39,10 @@ public class PeliculaService {
 
     public PeliculaResponseDto save(PeliculaRequestDto dto) {
         Director director = directorRepository.findById(dto.idDirector()).orElseThrow(() -> new DirectorNoEncontradoException(dto.idDirector()));
+
+        if(peliculaRepository.existByTitulo(dto.titulo())){
+            throw new PeliculaYaExisteException(dto.titulo());
+        }
 
         Pelicula pelicula = dto.toEntity();
         pelicula.addDirector(director);

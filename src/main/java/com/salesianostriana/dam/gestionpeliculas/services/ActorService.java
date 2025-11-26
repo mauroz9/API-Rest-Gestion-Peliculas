@@ -19,10 +19,10 @@ public class ActorService {
     public List<ActorResponseDto> findAll(){
         List<ActorResponseDto> result = actorRepository.findAll().stream().map(ActorResponseDto::of).toList();
 
-        /*if(result.isEmpty()){
+        if(result.isEmpty()){
             throw new ActorNoEncontradoException("Lista de actores vacia");
         }
-        */
+
         return result;
     }
 

@@ -26,9 +26,9 @@ public class PeliculaService {
     public List<PeliculaResponseDto> findAll() {
         List<PeliculaResponseDto> result = peliculaRepository.findAll().stream().map(PeliculaResponseDto::of).toList();
 
-        /*if(result.isEmpty()){
+        if(result.isEmpty()){
             throw new PeliculaNoEncontradaException("Lista de películas vacia");
-        }*/
+        }
 
         return result;
     }

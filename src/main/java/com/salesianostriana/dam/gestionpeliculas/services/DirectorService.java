@@ -22,9 +22,9 @@ public class DirectorService {
     public List<DirectorResponseDto> getAll(){
         List<DirectorResponseDto> result = directorRepository.findAll().stream().map(DirectorResponseDto::of).toList();
 
-        /*if(result.isEmpty()){
+        if(result.isEmpty()){
             throw new DirectorNoEncontradoException("Lista de directores vacia");
-        }*/
+        }
 
         return result;
     }

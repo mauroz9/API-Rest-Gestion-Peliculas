@@ -40,9 +40,11 @@ public class PeliculaService {
     public PeliculaResponseDto save(PeliculaRequestDto dto) {
         Director director = directorRepository.findById(dto.idDirector()).orElseThrow(() -> new DirectorNoEncontradoException(dto.idDirector()));
 
-        if(peliculaRepository.existByTitulo(dto.titulo())){
+        if(peliculaRepository.existsByTitulo(dto.titulo())){
             throw new PeliculaYaExisteException(dto.titulo());
         }
+
+        directorService.detectarMenor(director, dto.fechaEstreno().getYear());
 
         Pelicula pelicula = dto.toEntity();
         pelicula.addDirector(director);

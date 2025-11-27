@@ -4,7 +4,7 @@ import com.salesianostriana.dam.gestionpeliculas.model.Actor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record ActorRequestDto(
-        @Schema(description = "Nombre del Actor", example = "") String nombre
+        @Schema(description = "Nombre del Actor", example = "Cillian Murphy") String nombre
 ) {
 
     public Actor toEntity(){

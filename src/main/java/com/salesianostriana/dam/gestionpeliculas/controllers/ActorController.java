@@ -28,7 +28,7 @@ public class ActorController {
 
     @GetMapping
     @Operation(summary = "Obtiene todos los actores")
-    @ApiResponses({
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Se han encontrado Actores",
@@ -36,16 +36,30 @@ public class ActorController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
                             examples = @ExampleObject(
-                                    value = "[{'id':1, 'nombre':Brad Pitt, 'peliculas': }]"
+                                    value = """
+                                            [
+                                                {
+                                                    "id": 1, 
+                                                    "nombre": "Brad Pitt", 
+                                                    "peliculas": []
+                                                },
+                                                {
+                                                    "id": 2, 
+                                                    "nombre": "Cillian Murphy", 
+                                                    "peliculas": []
+                                                }
+                                            ]
+                                            """
                             )
                     )
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "No se ha encontrado ningún actor"
+                    description = "No se ha encontrado ningún actor",
+                    content = @Content
             )
     })
-    public ResponseEntity<List<ActorResponseDto>> findAll(){
+    public ResponseEntity<List<ActorResponseDto>> findAll() {
         return ResponseEntity.ok(actorService.findAll());
     }
 
@@ -59,16 +73,23 @@ public class ActorController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
                             examples = @ExampleObject(
-                                    value = ""
+                                    value = """
+                                            {
+                                                "id": 1, 
+                                                "nombre": "Brad Pitt", 
+                                                "peliculas": []
+                                            }
+                                            """
                             )
                     )
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "No se ha encontrado el Actor"
+                    description = "No se ha encontrado el Actor",
+                    content = @Content
             )
     })
-    public ResponseEntity<ActorResponseDto> findById(@PathVariable Long id){
+    public ResponseEntity<ActorResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(actorService.findById(id));
     }
 
@@ -81,15 +102,24 @@ public class ActorController {
                     content = @Content(
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
-                            examples =  @ExampleObject(value = "'id':1, 'nombre':'Cillian Murphy', 'peliculas':[]")
+                            examples = @ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 3, 
+                                                "nombre": "Robert Downey Jr.", 
+                                                "peliculas": []
+                                            }
+                                            """
+                            )
                     )
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Bad Request, datos erroneos"
+                    description = "Bad Request, datos erroneos",
+                    content = @Content
             )
     })
-    public ResponseEntity<ActorResponseDto> create(@RequestBody ActorRequestDto dto){
+    public ResponseEntity<ActorResponseDto> create(@RequestBody ActorRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(actorService.save(dto));
     }
 
@@ -102,19 +132,29 @@ public class ActorController {
                     content = @Content(
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
-                            examples = @ExampleObject(value = "'id':1, 'nombre':'Mauro Murphy', 'peliculas':[]")
+                            examples = @ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 2, 
+                                                "nombre": "Mauro Murphy", 
+                                                "peliculas": []
+                                            }
+                                            """
+                            )
                     )
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Actor no encontrado"
+                    description = "Actor no encontrado",
+                    content = @Content
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Bad Request, datos erroneos"
+                    description = "Bad Request, datos erroneos",
+                    content = @Content
             )
     })
-    public ResponseEntity<ActorResponseDto> modify(@PathVariable Long id, @RequestBody ActorRequestDto dto){
+    public ResponseEntity<ActorResponseDto> modify(@PathVariable Long id, @RequestBody ActorRequestDto dto) {
         return ResponseEntity.ok(actorService.modify(id, dto));
     }
 
@@ -123,14 +163,16 @@ public class ActorController {
     @ApiResponses({
             @ApiResponse(
                     responseCode = "204",
-                    description = "Actor borrado"
+                    description = "Actor borrado",
+                    content = @Content
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Actor no encontrado"
+                    description = "Actor no encontrado",
+                    content = @Content
             )
     })
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         actorService.delete(id);
         return ResponseEntity.noContent().build();
     }

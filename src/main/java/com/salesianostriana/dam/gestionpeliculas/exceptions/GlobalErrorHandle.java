@@ -57,4 +57,15 @@ public class GlobalErrorHandle {
 
         return problemDetail;
     }
+
+    @ExceptionHandler(DirectorTienePeliculasException.class)
+    public ProblemDetail handleDirectorTienePeliculasException(DirectorTienePeliculasException ex){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT, ex.getMessage()
+        );
+
+        problemDetail.setTitle("Operación no permitida");
+        problemDetail.setType(URI.create("https://www.api-peliculas.es/errors/director-has-movies"));
+        return problemDetail;
+    }
 }

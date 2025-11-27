@@ -62,7 +62,7 @@ public class DirectorController {
             )
     })
     public ResponseEntity<List<DirectorResponseDto>> findAll() {
-        return ResponseEntity.ok(directorService.getAll());
+        return ResponseEntity.ok(directorService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -93,7 +93,7 @@ public class DirectorController {
             )
     })
     public ResponseEntity<DirectorResponseDto> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(directorService.getById(id));
+        return ResponseEntity.ok(directorService.findById(id));
     }
 
     @PostMapping

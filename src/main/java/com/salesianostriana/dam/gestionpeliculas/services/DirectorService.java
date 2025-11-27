@@ -17,7 +17,7 @@ public class DirectorService {
 
     private final DirectorRepository directorRepository;
 
-    public List<DirectorResponseDto> getAll(){
+    public List<DirectorResponseDto> findAll(){
         List<DirectorResponseDto> result = directorRepository.findAll().stream().map(DirectorResponseDto::of).toList();
 
         if(result.isEmpty()){
@@ -27,7 +27,7 @@ public class DirectorService {
         return result;
     }
 
-    public DirectorResponseDto getById(Long id){
+    public DirectorResponseDto findById(Long id){
         return directorRepository.findById(id).map(DirectorResponseDto::of).orElseThrow(() -> new DirectorNoEncontradoException(id));
     }
 
@@ -35,7 +35,7 @@ public class DirectorService {
         Director guardado = directorRepository.save(dto.toEntity());
 
         if(guardado.esMenor()){
-            throw new DirectorNoEncontradoException("El director que intentas guardar es menor de edad");
+            throw new DirectorMenorDeEdadException("El director que intentas guardar es menor de edad");
         }
 
         return DirectorResponseDto.of(guardado);

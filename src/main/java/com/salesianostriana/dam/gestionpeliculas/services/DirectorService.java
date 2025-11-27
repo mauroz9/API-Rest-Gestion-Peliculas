@@ -4,6 +4,7 @@ import com.salesianostriana.dam.gestionpeliculas.dto.DirectorRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.DirectorResponseDto;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorMenorDeEdadException;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorNoEncontradoException;
+import com.salesianostriana.dam.gestionpeliculas.exceptions.DirectorTienePeliculasException;
 import com.salesianostriana.dam.gestionpeliculas.model.Director;
 import com.salesianostriana.dam.gestionpeliculas.repositories.DirectorRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,11 +57,14 @@ public class DirectorService {
     }
 
     public void delete(Long id){
-        if(directorRepository.existsById(id)){
-            directorRepository.deleteById(id);
-        }else{
-            throw new DirectorNoEncontradoException(id);
+        Director director = directorRepository.findById(id)
+                .orElseThrow(() -> new DirectorNoEncontradoException(id));
+
+        if (!director.getPeliculas().isEmpty()) {
+            throw new DirectorTienePeliculasException(id);
         }
+
+        directorRepository.delete(director);
     }
 
 }

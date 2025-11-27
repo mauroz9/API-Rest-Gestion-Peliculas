@@ -174,6 +174,11 @@ public class DirectorController {
                     responseCode = "404",
                     description = "Director no encontrado",
                     content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "No se puede borrar un Director con Películas asociadas",
+                    content = @Content
             )
     })
     public ResponseEntity<?> delete(@PathVariable Long id) {

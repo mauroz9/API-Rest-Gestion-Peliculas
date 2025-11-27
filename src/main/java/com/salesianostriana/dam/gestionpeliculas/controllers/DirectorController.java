@@ -119,7 +119,7 @@ public class DirectorController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Bad Request, datos erroneos",
+                    description = "Bad Request, datos erroneos o Director menor de edad",
                     content = @Content
             )
     })
@@ -155,7 +155,7 @@ public class DirectorController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Bad Request, datos erroneos"
+                    description = "Bad Request, datos erroneos o Director menor de edad"
             )
     })
     public ResponseEntity<DirectorResponseDto> modify(@PathVariable Long id, @RequestBody DirectorRequestDto dto) {

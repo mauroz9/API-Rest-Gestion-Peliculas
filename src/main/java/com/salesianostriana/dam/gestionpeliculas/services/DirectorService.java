@@ -33,13 +33,13 @@ public class DirectorService {
     }
 
     public DirectorResponseDto save(DirectorRequestDto dto){
-        Director guardado = directorRepository.save(dto.toEntity());
+        Director nuevo = dto.toEntity();
 
-        if(guardado.esMenor()){
+        if(nuevo.esMenor()){
             throw new DirectorMenorDeEdadException("El director que intentas guardar es menor de edad");
         }
 
-        return DirectorResponseDto.of(guardado);
+        return DirectorResponseDto.of(directorRepository.save(nuevo));
     }
 
     public DirectorResponseDto modify(Long id, DirectorRequestDto dto){
@@ -52,7 +52,7 @@ public class DirectorService {
         director.setNombre(dto.nombre());
         director.setAnioNacimiento(dto.anioNacimiento());
 
-        return DirectorResponseDto.of(director);
+        return DirectorResponseDto.of(directorRepository.save(director));
 
     }
 

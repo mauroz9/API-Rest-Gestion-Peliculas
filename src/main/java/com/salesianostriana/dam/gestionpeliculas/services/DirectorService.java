@@ -35,7 +35,7 @@ public class DirectorService {
         Director guardado = directorRepository.save(dto.toEntity());
 
         if(guardado.esMenor()){
-            throw new DirectorNoEncontradoException("El director que intentas guardar es menor de edad");
+            throw new DirectorMenorDeEdadException("El director que intentas guardar es menor de edad");
         }
 
         return DirectorResponseDto.of(guardado);

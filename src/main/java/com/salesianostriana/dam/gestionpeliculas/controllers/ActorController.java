@@ -71,7 +71,7 @@ public class ActorController {
                     description = "Se ha encontrado el Actor",
                     content = @Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
+                            schema = @Schema(implementation = ActorResponseDto.class),
                             examples = @ExampleObject(
                                     value = """
                                             {
@@ -101,7 +101,7 @@ public class ActorController {
                     description = "Actor creado",
                     content = @Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
+                            schema = @Schema(implementation = ActorResponseDto.class),
                             examples = @ExampleObject(
                                     value = """
                                             {
@@ -131,7 +131,7 @@ public class ActorController {
                     description = "Actor modificado",
                     content = @Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ActorResponseDto.class)),
+                            schema = @Schema(implementation = ActorResponseDto.class),
                             examples = @ExampleObject(
                                     value = """
                                             {

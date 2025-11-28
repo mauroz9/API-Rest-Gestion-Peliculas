@@ -1,6 +1,6 @@
 # Gestion de Peliculas - API REST
 
-Este proyecto consiste en una API REST desarrollada con Spring Boot para la gestión de Películas y, los Acores y Directores que las componen. La aplicación permite administrar Directores, Películas y Actores, gestionando las relaciones entre estas entidades y aplicando reglas de negocio específicas para asegurar la integridad de los datos.
+Este proyecto consiste en una API REST desarrollada con Spring Boot para la gestión de Películas. La aplicación permite administrar Directores, Películas y Actores, gestionando las relaciones entre estas entidades y aplicando reglas de negocio específicas para asegurar la integridad de los datos.
 
 ## Tecnologias
 

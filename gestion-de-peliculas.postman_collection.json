@@ -227,13 +227,13 @@
 							"raw": "{\r\n  \"nombre\": \"Christopher Edward Nolan\",\r\n  \"anioNacimiento\": 2013\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/directores/1",
+							"raw": "{{base_url}}/directores/302",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"directores",
-								"1"
+								"302"
 							]
 						}
 					},
@@ -498,7 +498,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Oppenheime\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
+							"raw": "{\r\n  \"titulo\": \"Oppenheimer\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -650,7 +650,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Oppenheimer\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 2\r\n}",
+							"raw": "{\r\n  \"titulo\": \"Bob-Sponge\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -658,13 +658,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/peliculas/1",
+							"raw": "{{base_url}}/peliculas/252",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"peliculas",
-								"1"
+								"252"
 							]
 						}
 					},
@@ -765,14 +765,23 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/peliculas/1/actores/1",
+							"raw": "{{base_url}}/peliculas/51/actores/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"peliculas",
-								"1",
+								"51",
 								"actores",
 								"1"
 							]

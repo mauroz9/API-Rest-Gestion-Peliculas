@@ -4,6 +4,7 @@ import com.salesianostriana.dam.gestionpeliculas.dto.ActorRequestDto;
 import com.salesianostriana.dam.gestionpeliculas.dto.ActorResponseDto;
 import com.salesianostriana.dam.gestionpeliculas.exceptions.ActorNoEncontradoException;
 import com.salesianostriana.dam.gestionpeliculas.model.Actor;
+import com.salesianostriana.dam.gestionpeliculas.model.Pelicula;
 import com.salesianostriana.dam.gestionpeliculas.repositories.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,10 +45,13 @@ public class ActorService {
     }
 
     public void delete(Long id){
-        if(actorRepository.existsById(id)){
-            actorRepository.deleteById(id);
-        }else{
-            throw new ActorNoEncontradoException(id);
+        Actor actor = actorRepository.findById(id)
+                .orElseThrow(() -> new ActorNoEncontradoException(id));
+
+        for (Pelicula pelicula : actor.getPeliculas()) {
+            pelicula.getActores().remove(actor);
         }
+
+        actorRepository.deleteById(id);
     }
 }

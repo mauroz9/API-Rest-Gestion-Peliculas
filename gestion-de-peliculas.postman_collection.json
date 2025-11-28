@@ -1,23 +1,49 @@
 {
 	"info": {
-		"_postman_id": "1cbdb0ce-ae24-44fe-9799-dc6d60cce1ef",
+		"_postman_id": "9d5db7ef-9f7c-4fd8-9ab3-6f1f5ab0b399",
 		"name": "Gestión de Películas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "50047731",
-		"_collection_link": "https://serrano-rumau24-1565806.postman.co/workspace/Mauro-Serrano-Ruiz's-Workspace~8a3fb0f2-14bd-4a3a-848f-36af09202d78/collection/50047731-1cbdb0ce-ae24-44fe-9799-dc6d60cce1ef?action=share&source=collection_link&creator=50047731"
+		"_exporter_id": "50071473",
+		"_collection_link": "https://warped-equinox-59252.postman.co/workspace/My-Workspace~55617a70-8020-46c1-8af0-c3eb99f0578e/collection/50071473-9d5db7ef-9f7c-4fd8-9ab3-6f1f5ab0b399?action=share&source=collection_link&creator=50071473"
 	},
 	"item": [
 		{
 			"name": "Director",
 			"item": [
 				{
-					"name": "Crear Director",
+					"name": "Crear Director 201",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"nombre\": \"Christopher Nolan\",\r\n  \"anioNacimiento\": 1970\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/directores",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Director 400",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Nolan\",\r\n  \"anioNacimiento\": 2015\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"Christopher Nolan\",\r\n  \"anioNacimiento\": 1970\r\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{base_url}}/directores",
@@ -61,7 +87,7 @@
 					"response": []
 				},
 				{
-					"name": "Obtener un Director",
+					"name": "Obtener un Director 200",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -86,7 +112,32 @@
 					"response": []
 				},
 				{
-					"name": "Editar Director",
+					"name": "Obtener un Director 404",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Nolan\",\r\n  \"anioNacimiento\": 1970\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/directores/9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Director 200",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -113,7 +164,105 @@
 					"response": []
 				},
 				{
-					"name": "Eliminar Director",
+					"name": "Editar Director 400",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Edward Nolan\",\r\n  \"anioNacimiento\": 2015\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/directores/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Director 404",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Edward Nolan\",\r\n  \"anioNacimiento\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/directores/7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Director 204",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Edward Nolan\",\r\n  \"anioNacimiento\": 2013\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/directores/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Director 404",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Christopher Edward Nolan\",\r\n  \"anioNacimiento\": 2013\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/directores/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directores",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Director 409",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -140,7 +289,7 @@
 			"name": "Actor",
 			"item": [
 				{
-					"name": "Crear Actor",
+					"name": "Crear Actor 201",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -166,7 +315,7 @@
 					"response": []
 				},
 				{
-					"name": "Listar Directores",
+					"name": "Listar Actores",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -190,7 +339,7 @@
 					"response": []
 				},
 				{
-					"name": "Obtener un Actor",
+					"name": "Obtener un Actor 200",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -202,20 +351,45 @@
 							"raw": "{\r\n  \"nombre\": \"Cillian Murphy\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/actores/4",
+							"raw": "{{base_url}}/actores/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"actores",
-								"4"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Editar Actor",
+					"name": "Obtener un Actor 404",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Cillian Murphy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/actores/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"actores",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Actor 200",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -229,20 +403,47 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/actores/2",
+							"raw": "{{base_url}}/actores/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"actores",
-								"2"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Eliminar Actor",
+					"name": "Editar Actor 404",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Mauro Murphy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/actores/7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"actores",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Actor 204",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -251,13 +452,35 @@
 							"raw": "{\r\n  \"nombre\": \"Mauro Murphy\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/actores/2",
+							"raw": "{{base_url}}/actores/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"actores",
-								"2"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Actor 404",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Mauro Murphy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/actores/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"actores",
+								"8"
 							]
 						}
 					},
@@ -269,13 +492,65 @@
 			"name": "Película",
 			"item": [
 				{
-					"name": "Crear Película",
+					"name": "Crear Película 201",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titulo\": \"Oppenheime\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 2\r\n}",
+							"raw": "{\r\n  \"titulo\": \"Oppenheime\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Película 404",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Oppenheime\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Película 409",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Inception\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,7 +594,32 @@
 					"response": []
 				},
 				{
-					"name": "Obtener una Película",
+					"name": "Obtener una Película 200",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Oppenheimer\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una Película 404",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -344,7 +644,7 @@
 					"response": []
 				},
 				{
-					"name": "Editar Película",
+					"name": "Editar Película 200",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -371,7 +671,61 @@
 					"response": []
 				},
 				{
-					"name": "Eliminar Película",
+					"name": "Editar Película 404",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Oppenheimer\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Película 409",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Once Upon a Time in Hollywood\",\r\n  \"genero\": \"Biopic/Drama\",\r\n  \"fechaEstreno\": \"2023-07-21\",\r\n  \"idDirector\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Película 204",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -389,20 +743,78 @@
 					"response": []
 				},
 				{
-					"name": "Asignar Actor a Película",
+					"name": "Eliminar Película 404",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/peliculas/2/actores/1",
+							"raw": "{{base_url}}/peliculas/9",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"peliculas",
-								"2",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar Actor a Película 200",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas/1/actores/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"1",
 								"actores",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar Actor a Película 404",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas/7/actores/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"7",
+								"actores",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar Actor a Película 409",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas/51/actores/51",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"51",
+								"actores",
+								"51"
 							]
 						}
 					},
@@ -438,7 +850,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "localhost:8080/api/v1"
+			"value": ""
 		}
 	]
 }
